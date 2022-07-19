@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sandbox | Firebase Authentication</title>
+
+    <script
+      src="https://kit.fontawesome.com/d72d59cfcd.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/9.8.2/firebase-app-compat.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/9.8.2/firebase-auth-compat.js"></script>
+    <script defer src="/__/firebase/9.8.2/firebase-database-compat.js"></script>
+    <script
+      defer
+      src="/__/firebase/9.8.2/firebase-firestore-compat.js"
+    ></script>
+    <script
+      defer
+      src="/__/firebase/9.8.2/firebase-functions-compat.js"
+    ></script>
+    <script
+      defer
+      src="/__/firebase/9.8.2/firebase-messaging-compat.js"
+    ></script>
+    <script defer src="/__/firebase/9.8.2/firebase-storage-compat.js"></script>
+    <script
+      defer
+      src="/__/firebase/9.8.2/firebase-analytics-compat.js"
+    ></script>
+    <script
+      defer
+      src="/__/firebase/9.8.2/firebase-remote-config-compat.js"
+    ></script>
+    <script
+      defer
+      src="/__/firebase/9.8.2/firebase-performance-compat.js"
+    ></script>
+    <!-- 
+      initialize the SDK after all desired features are loaded, set useEmulator to false
+      to avoid connecting the SDK to running emulators.
+    -->
+    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+    <script defer src="./auth.js"></script>
+    <script defer src="./app.js"></script>
+
+    <link rel="stylesheet" href="./style.css" />
+    <script src="
+    https://ramachandrajr.github.io/lorem-js/lorem-js/lorem.min.js"></script>
+  </head>
+
+  <body>
+    <!-- BEGINNING !!SEPERATION!! -->
+    <h3 id="top-word">
+      Getting Started with <br /><span class="flash">Firebase</span>
+      Authentication
+    </h3>
+
+    <form class="home-form" id="loginForm" action="">
+      <h2>Login</h2>
+      <input
+        id="textEmailLogin"
+        type="email"
+        id="email"
+        name="email"
+        placeholder="Email"
+        required
+      />
+
+      <input
+        id="textPwdLogin"
+        type="password"
+        id="pwd"
+        name="pwd"
+        placeholder="Password"
+        required
+      />
+
+      <button
+        style="margin-top: 40px"
+        type="submit"
+        class="formBtn"
+        id="logInBtn"
+      >
+        Log In
+      </button>
+      <a id="signUpFormBtn">Sign Up</a>
+    </form>
+
+    <!-- !!SEPERATION!! -->
+
+    <form class="home-form" style="height: 450px" action="" id="signUpForm">
+      <h2>Registration</h2>
+      <input
+        id="textEmailSignup"
+        type="email"
+        id="email"
+        name="email"
+        placeholder="Email"
+        required
+      />
+
+      <input
+        id="textPwdSignup"
+        type="password"
+        id="pwd"
+        name="pwd"
+        placeholder="Password"
+        required
+      />
+
+      <textarea
+        id="bio"
+        placeholder="Biography"
+        required
+      ></textarea>
+
+      <button
+        style="margin-top: 20px"
+        type="submit"
+        class="formBtn"
+        id="signUpBtn"
+      >
+        Sign Up
+      </button>
+      <a id="logInFormBtn">Log In</a>
+    </form>
+
+    <div class="error">
+      <p class="errors-icon">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+      </p>
+      <p id="form-errors">This is the text for errors</p>
+    </div>
+
+    <!-- !!SEPERATION!! -->
+
+    <!-- APPLICATION BODY -->
+    <section id="app" class="app">
+      <!-- ACCOUNT -->
+      <div id="account-modal" class="modal">
+        <div class="modal-content">
+          
+          <div class="modal-header">
+            <h4>Account details</h4>
+            <span id="close" class="close">
+              &times;
+            </span>
+          </div>
+          <div class="line"></div>
+          <div class="content-wrap">
+            <div class="account-details">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- !!SEPERATION!! -->
+
+    <!-- CREATE GUIDE MODAL -->
+    <div id="guide-modal" class="modal">
+      <div class="modal-content">
+        
+        <div class="modal-header">
+          <h4>Create Guides</h4>
+          <span id="close" class="close">
+            &times;
+          </span>
+        </div>
+        <div class="line"></div>
+        <div class="content-wrap">
+          <div class="guide-details">
+            <form id="create-form">
+              <div class="input-field">
+                <label for="title">Guide Title</label>
+                <input type="text" id="title" required>
+              </div>
+              <div class="input-field">
+                <label for="content">Guide Content</label>
+                <textarea id="content" class="materialize-textarea" required></textarea>
+              </div>
+              <div class="input-field">
+                <label for="guidePhoto">Cover Photo</label>
+            <input
+              type="file"
+              id="guidePhoto"
+              accept="image/png, image/jpeg, image/jpg"
+              required
+            />
+              </div>
+              <button type="submit">Create Guide</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+      <!-- !!SEPERATION!! -->
+
+      <nav>
+        <img
+          src="./logo.svg"
+          height="70%"
+          style="margin-left: 10px"
+          alt="logo"
+        />
+        <ul>
+          <li><button href="#" id="accountOpenBtn" class="nav-icons">Account</button></li>
+          <li><button href="#" id="guideOpenBtn" class="nav-icons">Create Guide</button></li>
+          <li>
+            <button
+              href="#"
+              id="logOutBtn"
+              class="nav-icons"
+              style="border-radius: 0 10px 0 0"
+            >
+              <i class="fa-solid fa-power-off"></i>
+            </button>
+          </li>
+        </ul>
+      </nav>
+
+    
+
+    <!-- !!SEPERATION!! -->
+
+    <!-- SCREEN -->      
+      <div class="wrapper">
+        <div class="screen">
+          <div class="screen-content">
+            <h1>Welcome to the Guide List</h1>
+            <p class="welcome-description">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Voluptates, quisquam. <br> Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            </p>
+            
+            <button class="welcomeBtn" onclick="window.location.href='#gd-header'">Get Started</button>
+
+            <div class="guides">
+              <h3 id="gd-header">Guides</h3>
+              <ul class="collapsible" style="border: none;"></ul>
+            </div>
+            <br><br><br>
+            <p class="welcome-description">This is the course used to build this App</p>
+            <iframe width="100%" height="315" src="https://www.youtube.com/embed/videoseries?list=PL4cUxeGkcC9jUPIes_B8vRjn1_GaplOPQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            
+            <!-- !!SEPERATION!! -->
+            <!-- THIS IS WHERE MEDIA WILL GO -->
+        </div>
+      </div>
+      
+    </section>
+  </body>
+</html>
